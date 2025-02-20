@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  influxdbv1:
+    image: influxdb:1.8
+    container_name: influxdb
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+      - ./data:/data # Add your local data directory
+    environment:
+      - INFLUXDB_DB=saas
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=influxdevantares2024
+      - INFLUXDB_USER=antares
+      - INFLUXDB_USER_PASSWORD=influxdevantares2024
+      - INFLUXDB_HTTP_FLUX_ENABLED=true
+    restart: unless-stopped
+
+volumes:
+  influxdb_data:
